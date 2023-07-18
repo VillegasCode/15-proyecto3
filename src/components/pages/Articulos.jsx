@@ -6,28 +6,28 @@ export const Articulos = () => {
   // Creamos un hook useState con el objeto articulos y su configuración setArticulos
   const [articulos, setArticulos] = useState([]);
 
-  // Creamos un hook useEffect que cargue al inicio con los corchetes y lo cargamos con un array de objetos llamado data y se lo pasamos al hook setArticulos
-  // useEffect(() => {
-  //   let data = [
-  //     {
-  //       _id: 1,
-  //       titulo: "Titulo 1",
-  //       contenido: "Contenido"
-  //     },
-  //     {
-  //       _id: 2,
-  //       titulo: "Titulo 2",
-  //       contenido: "Contenido 2"
-  //     },
-  //     {
-  //       _id: 3,
-  //       titulo: "Titulo 3",
-  //       contenido: "Contenido 3"
-  //     },
-  //   ];
+  Creamos un hook useEffect que cargue al inicio con los corchetes y lo cargamos con un array de objetos llamado data y se lo pasamos al hook setArticulos
+  useEffect(() => {
+    let data = [
+      {
+        _id: 1,
+        titulo: "Titulo 1",
+        contenido: "Contenido"
+      },
+      {
+        _id: 2,
+        titulo: "Titulo 2",
+        contenido: "Contenido 2"
+      },
+      {
+        _id: 3,
+        titulo: "Titulo 3",
+        contenido: "Contenido 3"
+      },
+    ];
 
-  //   setArticulos(data);
-  // }, [])
+    setArticulos(data);
+  }, [])
 
 
   useEffect(() => {
