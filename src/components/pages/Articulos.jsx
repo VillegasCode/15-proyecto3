@@ -43,7 +43,13 @@ export const Articulos = () => {
     });
     let datos = await peticion.json();
 
+    //Para saber que props tiene el objeto datos
     console.log (datos);
+
+    // Si la prop status del objeto datos es "success" entonces el useState setArticulos se cargará con .articulos del objeto datos
+    if (datos.status == "success"){
+      setArticulos(datos.articulos);
+    }
   }
 
 
