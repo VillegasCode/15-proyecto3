@@ -1,6 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { Global } from '../../helpers/Global';
+import { Peticion } from '../../helpers/Peticion';
 
 export const Articulos = () => {
 
@@ -38,12 +39,15 @@ export const Articulos = () => {
   }, [])
 
   const conseguirArticulos = async () => {
-    const url = Global.url + "articulos";
+
+   const {datos, cargando} = await Peticion(Global.url+"articulos", "GET");
+
+    /*
     let peticion = await fetch(url, {
       method: "GET"
     });
     let datos = await peticion.json();
-
+    */
     //Para saber que props tiene el objeto datos
     console.log(datos);
 
