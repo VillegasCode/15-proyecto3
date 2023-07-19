@@ -2,11 +2,13 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import { Global } from '../../helpers/Global';
 import { Peticion } from '../../helpers/Peticion';
+import { Listado } from './Listado';
 
 export const Articulos = () => {
 
   // Creamos un hook useState con el objeto articulos y su configuración setArticulos
   const [articulos, setArticulos] = useState([]);
+  const [cargando, setCargando] = useState(true);
 
   // Creamos un hook useEffect que cargue al inicio con los corchetes y lo cargamos con un array de objetos llamado data y se lo pasamos al hook setArticulos
   // useEffect(() => {
@@ -55,39 +57,19 @@ export const Articulos = () => {
     if (datos.status == "success") {
       setArticulos(datos.articulos);
     }
+
+    setCargando(false)
   }
 
-
-  // El objeto articulos del hook ya cargado con el array lo recorremos con el método .map
+// Cargamos desde el componente LISTADO con los 2 parámetros y lo recorremos con el método .map
   return (
     <>
-      {
-        articulos.length >= 1 ? (
-          // {/* Creamos un objeto llamado articulo que contiene los datos recorridos por el array */ }
-          articulos.map(articulo => {
-            return (
-              // Creamos una key para react pueda identificar donde poner la información con los datos del array
-              <article key={articulo._id} className="articulo-item">
-                <div className='mascara'>
-                  <img src='https://miro.medium.com/max/1400/1*k0SazfSJ-tPSBbt2WDYIyw.png'></img>
-                </div>
-                <div className='datos'>
-                  <h3 className="title">{articulo.titulo}</h3>
-                  <p className="description">{articulo.contenido}</p>
-
-                  <button className="edit">Editar</button>
-                  <button className="delete">Borrar</button>
-
-                </div>
-              </article>
-            );
-          })
-        )
-          :
-          (
-            <h1>No hay artículos disponibles</h1>
-          )
-      }
+    {
+      cargando ? "Cargando..."
+      :
+      articulos.length >= 1 ? <Listado articulos = {articulos} setArticulos= {setArticulos}/>
+                            : <h1>No hay artículos disponibles</h1>
+    }
     </>
   )
 
