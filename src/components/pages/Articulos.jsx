@@ -37,19 +37,18 @@ export const Articulos = () => {
   useEffect(() => {
 
     conseguirArticulos();
-
   }, [])
 
   const conseguirArticulos = async () => {
-
-   const {datos, cargando} = await Peticion(Global.url+"articulos", "GET");
-
-    /*
-    let peticion = await fetch(url, {
-      method: "GET"
-    });
-    let datos = await peticion.json();
-    */
+    
+  const {datos, cargando} = await Peticion(Global.url+"articulos", "GET");
+   
+    
+    // let peticion = await fetch(Global.url+"articulos", {
+    //   method: "GET"
+    // });
+    // let datos = await peticion.json();
+    
     //Para saber que props tiene el objeto datos
     console.log(datos);
 
