@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Global } from '../../helpers/Global';
 import { Peticion } from '../../helpers/Peticion';
 
@@ -23,15 +24,16 @@ export const Listado = ({ articulos, setArticulos }) => {
                 <article key={articulo._id} className="articulo-item">
                     <div className='mascara'>
                         {/* Si la  imagen es diferente a default.png entonces que cargue la imagen del api*/}
-                        {articulo.imagen != "default.png" && <img src={Global.url + "imagen/" + articulo.imagen} />};
+                        {articulo.imagen != "default.png" && <img src={Global.url + "imagen/" + articulo.imagen} />}
                         {/* Si la  imagen es igual a default.png entonces que cargue la imagen por defecto */}
-                        {articulo.imagen == "default.png" && <img src='https://miro.medium.com/max/1400/1*k0SazfSJ-tPSBbt2WDYIyw.png' />};
+                        {articulo.imagen == "default.png" && <img src='https://miro.medium.com/max/1400/1*k0SazfSJ-tPSBbt2WDYIyw.png' />}
                     </div>
                     <div className='datos'>
-                        <h3 className="title">{articulo.titulo}</h3>
+                        <h3 className="title"><Link to={"/articulo/"+ articulo._id}>{articulo.titulo}</Link></h3>
                         <p className="description">{articulo.contenido}</p>
 
-                        <button className="edit">Editar</button>
+                        <Link to={"/editar/" + articulo._id} className='edit'>Editar</Link>
+
                         <button className="delete" onClick={() => {
                             eliminar(articulo._id)
                         }}>Borrar</button>
