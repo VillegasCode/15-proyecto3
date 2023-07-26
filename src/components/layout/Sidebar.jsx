@@ -29,6 +29,6 @@ export const Sidebar = () => {
           <input type="submit" id="save" value="Guardar" />
         </form>
       </div> */}
-    </aside>
+    </aside> 
   )
 }
