@@ -4,6 +4,7 @@ import { useForm } from "../../hooks/useForm";
 import { Peticion } from "../../helpers/Peticion";
 import { Global } from '../../helpers/Global';
 import { useParams } from  'react-router-dom';
+var datosCopiar;
 
 
 export const Editar = () => {
@@ -24,18 +25,33 @@ export const Editar = () => {
     console.log("Estado de obtención de los datos: " + datos.status);
     if (datos.status === "success") {
       setArticulo(datos.articulo);
+      datosCopiar = datos.articulo;
+      console.log("DATOS COPIAR: " + datosCopiar);
     }
 //datos.articulo.titulo
 //datos.articulo.contenido
   }
-
+  
   const editarArticulo = async (e) => {
     e.preventDefault();
-
+    console.log(datosCopiar);
     //Recoger datos formulario
+    console.log(formulario);
     let nuevoArticulo = formulario;
     //SI FORMULARIO ESTÁ VACÍO ENTONCES ASIGNAR LOS VALUES A CADA CAMPO DEL FORMULARIO PARA QUE ESTÉN LLENOS
-    console.log("Nuevo Artículo editado: " + JSON.stringify(nuevoArticulo));
+    console.log("Nuevo Artíclo editado: " + JSON.stringify(nuevoArticulo));
+
+    if(Object.keys(nuevoArticulo).length === 0){
+      nuevoArticulo = datosCopiar;
+      console.log("Llenado por defecto: " + JSON.stringify(nuevoArticulo));
+    } else if(nuevoArticulo.titulo == null) {
+      nuevoArticulo.titulo = articulo.titulo;
+    } else if(nuevoArticulo.contenido == null) {
+      nuevoArticulo.contenido = articulo.contenido;
+    } else if(nuevoArticulo.imagen == null) {
+      nuevoArticulo.imagen = articulo.imagen;
+      console.log("IMAGEN: " + nuevoArticulo.imagen);
+    }
 
     //Guardar articulo en el backend
     const { datos } = await Peticion(Global.url + "articulo/" + params.id, "PUT", nuevoArticulo);
