@@ -27,7 +27,7 @@ const [formulario, setFormulario] = useState(objetoIncial);
 
   const cambiado = ({target}) => {
     const {name, value} = target;
-
+    
     setFormulario({
       ...formulario,
       [name]: value
