@@ -180,9 +180,50 @@ body{
 
 .button,
 button,
-input[type="submit"],
 input[type="button"],
 .edit {
+  text-decoration: none;
+  width: 100px;
+  background: #0b70e1;
+  color: white;
+  border: 0;
+  outline: 0;
+  padding:15px;
+  border-radius: 3px;
+  margin-top:15px;
+  text-transform: capitalize;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 300ms;
+}
+
+.btn-success{
+  text-decoration: none;
+  width: 100px;
+  background: #0b70e1;
+  color: white;
+  border: 0;
+  outline: 0;
+  padding:15px;
+  border-radius: 3px;
+  margin-top:15px;
+  text-transform: capitalize;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 300ms;
+}
+
+.btn-disabled{
+  width: fit-content;
+  background-color: #d1defa;
+  color: black;
+  font-size: 16px;
+  cursor:not-allowed;
+}
+
+.btn-editar-habilitado{
   text-decoration: none;
   width: 100px;
   background: #0b70e1;
