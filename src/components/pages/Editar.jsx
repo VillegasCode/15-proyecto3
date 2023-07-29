@@ -3,17 +3,22 @@ import { useState, useEffect } from "react";
 import { useForm } from "../../hooks/useForm";
 import { Peticion } from "../../helpers/Peticion";
 import { Global } from '../../helpers/Global';
-import { useParams } from  'react-router-dom';
+import { useParams } from 'react-router-dom';
 var datosCopiar;
 
 
 export const Editar = () => {
-
   const { formulario, enviado, cambiado } = useForm({});
   const [resultado, setResultado] = useState("no_enviado");
   const [noFormato, setnoFormato] = useState("");
   const [articulo, setArticulo] = useState({});
   const params = useParams();
+  const [disable, setDisable] = useState(false);
+  const [disableEditar, setDisableEditar] = useState(true);
+  const [valor, setValor] = useState("Guardar");
+  const [clasebtnGuardar, setClaseBtnGuardar] = useState("btn btn-success");
+  const [clasebtnEditar, setClaseBtnEditar] = useState("btn btn-editar");
+  const [btnEditarHidden, setbtnEditarHidden] = useState(true);
 
   useEffect(() => {
     conseguirArticulo();
@@ -28,10 +33,20 @@ export const Editar = () => {
       datosCopiar = datos.articulo;
       console.log("DATOS COPIAR: " + datosCopiar);
     }
-//datos.articulo.titulo
-//datos.articulo.contenido
+    console.log("Form al cargar: " + JSON.stringify(formulario));
   }
-  
+
+  const bntEditarFunction = (e) => {
+    e.preventDefault();
+
+    setValor("Guardar");
+    setDisable(false);
+    setClaseBtnGuardar("btn btn-success");
+    setbtnEditarHidden(true);
+    setResultado("no_enviado");
+    setnoFormato("");
+  }
+
   const editarArticulo = async (e) => {
     e.preventDefault();
     console.log(datosCopiar);
@@ -41,14 +56,14 @@ export const Editar = () => {
     //SI FORMULARIO ESTÁ VACÍO ENTONCES ASIGNAR LOS VALUES A CADA CAMPO DEL FORMULARIO PARA QUE ESTÉN LLENOS
     console.log("Nuevo Artíclo editado: " + JSON.stringify(nuevoArticulo));
 
-    if(Object.keys(nuevoArticulo).length === 0){
+    if (Object.keys(nuevoArticulo).length === 0) {
       nuevoArticulo = datosCopiar;
       console.log("Llenado por defecto: " + JSON.stringify(nuevoArticulo));
-    } else if(nuevoArticulo.titulo == null) {
+    } else if (nuevoArticulo.titulo == null) {
       nuevoArticulo.titulo = articulo.titulo;
-    } else if(nuevoArticulo.contenido == null) {
+    } else if (nuevoArticulo.contenido == null) {
       nuevoArticulo.contenido = articulo.contenido;
-    } else if(nuevoArticulo.imagen == null) {
+    } else if (nuevoArticulo.imagen == null) {
       nuevoArticulo.imagen = articulo.imagen;
       console.log("IMAGEN: " + nuevoArticulo.imagen);
     }
@@ -59,6 +74,12 @@ export const Editar = () => {
     console.log("ESTATUS CONTENIDO: " + datos.status);
     if (datos.status === "success" || datos.status === "Success") {
       setResultado("guardado");
+      setValor("GUARDADO");
+      setDisable(true);
+      setDisableEditar(false);
+      setClaseBtnGuardar("btn btn-disabled");
+      setClaseBtnEditar("btn btn-editar-habilitado");
+      setbtnEditarHidden(false);
     } else {
       setResultado("error");
       console.log("DATOS STATUS ERRONEO: " + resultado);
@@ -80,13 +101,17 @@ export const Editar = () => {
       if (subida.datos.status === "Success") {
         setResultado("guardado");
         setnoFormato("");
+        // deshabilitar();
         console.log("SUBIDA EXITOSA");
       } else {
+        // deshabilitar();
+
         setResultado("error");
         setnoFormato("error");
         console.log("SUBIDA ERRÓNEA: " + resultado + " Se subió y asignó una imagen por defecto");
       }
     } else {
+      // deshabilitar();
       setnoFormato("error");
       console.log("No se subió ninguna imagen");
     }
@@ -97,12 +122,7 @@ export const Editar = () => {
       <h1>Editar Artículo</h1>
       <p>Formulario para Editar: {articulo.titulo}</p>
       {/* <pre>{JSON.stringify(formulario)}</pre> */}
-      <pre>
-        <strong>{resultado == "guardado" ? "Articulos guardado con éxito!! " : ""}</strong>
-        <strong>{resultado == "error" ? "Los datos proporcionados son incorrectos " : ""}</strong>
-        <strong>{noFormato == "" ? "" : "Se asignó una imagen por defecto"}</strong>
-        </pre>
-      
+
       {/* Montar formulario */}
       <form className='formulario' onSubmit={editarArticulo}>
 
@@ -113,22 +133,31 @@ export const Editar = () => {
 
         <div className='form-group'>
           <label htmlFor="contenido">CONTENIDO</label>
-          <textarea type='text' name='contenido' onChange={cambiado} defaultValue={articulo.contenido}/>
+          <textarea type='text' name='contenido' onChange={cambiado} defaultValue={articulo.contenido} />
+          {console.log("Valor de Formulario Cambiado: " + JSON.stringify(formulario))}
         </div>
 
         <div className='form-group'>
           <label htmlFor="file0">IMAGEN</label>
           <div className='mascara'>
-                {/* Si la  imagen es diferente a default.png entonces que cargue la imagen del api*/}
-                {articulo.imagen != "default.png" && <img src={Global.url + "imagen/" + articulo.imagen} />}
-  {console.log("Articulo de Imagen: " + articulo.imagen)}
-                {/* Si la  imagen es igual a default.png entonces que cargue la imagen por defecto */}
-                {articulo.imagen == "default.png" && <img src='https://miro.medium.com/max/1400/1*k0SazfSJ-tPSBbt2WDYIyw.png' />}
-              </div>
+            {/* Si la  imagen es diferente a default.png entonces que cargue la imagen del api*/}
+            {articulo.imagen != "default.png" && <img src={Global.url + "imagen/" + articulo.imagen} />}
+
+            {/* Si la  imagen es igual a default.png entonces que cargue la imagen por defecto */}
+            {articulo.imagen == "default.png" && <img src='https://miro.medium.com/max/1400/1*k0SazfSJ-tPSBbt2WDYIyw.png' />}
+          </div>
           <input type='file' name='file0' id='file' />
         </div>
 
-        <input type='submit' value="Guardar" className='btn btn-success' />
+        <input id='btnGuardar' type='submit' value={valor} className={clasebtnGuardar} disabled={disable} /><br/>
+        <input id='btnEditar' onClick={bntEditarFunction} type='button' value={"EDITAR"} className={clasebtnEditar} hidden={btnEditarHidden} disabled={disableEditar} />
+        <pre>
+          <strong>{resultado == "guardado" ? "Artículo guardado con éxito!! " : ""}</strong>
+          {console.log("RESULTADO: " + resultado)}
+          <strong>{resultado == "error" ? "Los datos proporcionados son incorrectos " : ""}</strong>
+          <strong>{noFormato == "" ? "" : "No se modificó la imagen"}</strong>
+          <strong>{resultado == "no_enviado" ? "" : ""}</strong>
+        </pre>
 
       </form>
 
