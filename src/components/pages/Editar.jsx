@@ -15,7 +15,7 @@ export const Editar = () => {
   const params = useParams();
   const [disable, setDisable] = useState(false);
   const [disableEditar, setDisableEditar] = useState(true);
-  const [valor, setValor] = useState("Guardar");
+  const [valor, setValor] = useState("SAVE");
   const [clasebtnGuardar, setClaseBtnGuardar] = useState("btn btn-success");
   const [clasebtnEditar, setClaseBtnEditar] = useState("btn btn-editar");
   const [btnEditarHidden, setbtnEditarHidden] = useState(true);
@@ -39,7 +39,7 @@ export const Editar = () => {
   const bntEditarFunction = (e) => {
     e.preventDefault();
 
-    setValor("Guardar");
+    setValor("SAVE");
     setDisable(false);
     setClaseBtnGuardar("btn btn-success");
     setbtnEditarHidden(true);
@@ -74,7 +74,7 @@ export const Editar = () => {
     console.log("ESTATUS CONTENIDO: " + datos.status);
     if (datos.status === "success" || datos.status === "Success") {
       setResultado("guardado");
-      setValor("GUARDADO");
+      setValor("SAVED");
       setDisable(true);
       setDisableEditar(false);
       setClaseBtnGuardar("btn btn-disabled");
@@ -119,8 +119,8 @@ export const Editar = () => {
 
   return (
     <div className='jumbo'>
-      <h1>Editar Artículo</h1>
-      <p>Formulario para Editar: {articulo.titulo}</p>
+      <h1>Edit Article</h1>
+      <p>Form to Edit: {articulo.titulo}</p>
       {/* <pre>{JSON.stringify(formulario)}</pre> */}
 
       {/* Montar formulario */}
@@ -150,7 +150,7 @@ export const Editar = () => {
         </div>
 
         <input id='btnGuardar' type='submit' value={valor} className={clasebtnGuardar} disabled={disable} /><br/>
-        <input id='btnEditar' onClick={bntEditarFunction} type='button' value={"EDITAR"} className={clasebtnEditar} hidden={btnEditarHidden} disabled={disableEditar} />
+        <input id='btnEditar' onClick={bntEditarFunction} type='button' value={"EDIT"} className={clasebtnEditar} hidden={btnEditarHidden} disabled={disableEditar} />
         <pre>
           <strong>{resultado == "guardado" ? "Artículo guardado con éxito!! " : ""}</strong>
           {console.log("RESULTADO: " + resultado)}
