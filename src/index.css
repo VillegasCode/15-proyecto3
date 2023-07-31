@@ -8,6 +8,14 @@ body{
   margin: 0px;
 }
 
+ul {
+  display:inline-grid;
+}
+
+li {
+  text-align: start;
+}
+
 .layout{
   width: 100%;
   height: auto;
@@ -163,6 +171,21 @@ body{
   margin-bottom: 40px;
 }
 
+.social-media {
+  padding:15px;
+  padding-bottom: 5px;
+  border-color: #0b70e1;
+  border-width: 5px;
+  border-radius: 10px;
+  border-style:solid;
+  margin: 20px;
+  font-weight: 800;
+  font-size: large;
+  background-color: white;
+  color: black;
+  text-decoration: none;
+}
+
 .jumbo .mascara{
   width: 100%;
   height: auto;
@@ -182,7 +205,12 @@ img {
   width: inherit;
 }
 
-.button,
+.social-media-img{
+  width: 30px;
+  margin-right: 5px;
+}
+
+.button-articles,
 button,
 input[type="button"],
 .edit {
@@ -283,6 +311,7 @@ textarea
   display: block;
   margin: 0 auto;
   margin-top: 15px;
+  margin-bottom: 10px;
   padding: 12px;
   border-radius: 5px;
   background: #f6f7f9;
