@@ -58,34 +58,34 @@ export const Crear = () => {
 
   return (
     <div className='jumbo'>
-      <h1>Crear Artículo</h1>
-      <p>Formulario para crear artículo</p>
+      <h1>Create Articles</h1>
+      <p>Form to create an article</p>
       {/* <pre>{JSON.stringify(formulario)}</pre> */}
       <pre>
-        <strong>{resultado == "guardado" ? "Articulos guardado con éxito!! " : ""}</strong>
-        <strong>{resultado == "error" ? "Los datos proporcionados son incorrectos " : ""}</strong>
-        <strong>{noFormato == "" ? "" : "Se asignó una imagen por defecto"}</strong>
+        <strong>{resultado == "guardado" ? "Successfully saved article!! " : ""}</strong>
+        <strong>{resultado == "error" ? "The data provided is incorrect" : ""}</strong>
+        <strong>{noFormato == "" ? "" : "A default image was assigned"}</strong>
         </pre>
       
       {/* Montar formulario */}
       <form className='formulario' onSubmit={guardarArticulo}>
 
         <div className='form-group'>
-          <label htmlFor="titulo">TÍTULO</label>
+          <label htmlFor="titulo">TITLE</label>
           <input type='text' name='titulo' onChange={cambiado} />
         </div>
 
         <div className='form-group'>
-          <label htmlFor="contenido">CONTENIDO</label>
+          <label htmlFor="contenido">CONTENT</label>
           <textarea type='text' name='contenido' onChange={cambiado} />
         </div>
 
         <div className='form-group'>
-          <label htmlFor="file0">IMAGEN</label>
+          <label htmlFor="file0">IMAGE</label>
           <input type='file' name='file0' id='file' />
         </div>
 
-        <input type='submit' value="Guardar" className='btn btn-success' />
+        <input type='submit' value="SAVE" className='btn btn-success' />
 
       </form>
 
