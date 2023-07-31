@@ -32,11 +32,11 @@ export const Listado = ({ articulos, setArticulos }) => {
                         <h3 className="title"><Link to={"/articulo/"+ articulo._id}>{articulo.titulo}</Link></h3>
                         <p className="description">{articulo.contenido}</p>
 
-                        <Link to={"/editar/" + articulo._id} className='edit'>Editar</Link>
+                        <Link to={"/editar/" + articulo._id} className='edit'>Edit</Link>
 
                         <button className="delete" onClick={() => {
                             eliminar(articulo._id)
-                        }}>Borrar</button>
+                        }}>Delete</button>
 
                     </div>
                 </article>
