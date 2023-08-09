@@ -10,6 +10,8 @@ export const Crear = () => {
   const { formulario, enviado, cambiado } = useForm({});
   const [resultado, setResultado] = useState("no_enviado");
   const [noFormato, setnoFormato] = useState("");
+  const [btnDisable, setbtnDisable] = useState(false);
+  const [ClaseBtnGuardar, setClaseBtnGuardar] = useState("btn btn-success");
 
 
   const guardarArticulo = async (e) => {
@@ -25,6 +27,9 @@ export const Crear = () => {
 
     if (datos.status === "success") {
       setResultado("guardado");
+      setbtnDisable(true);
+      setClaseBtnGuardar("btn btn-disabled");
+
     } else {
       setResultado("error");
       console.log("DATOS STATUS ERRONEO: " + resultado);
@@ -60,24 +65,18 @@ export const Crear = () => {
     <div className='jumbo'>
       <h1>Create Articles</h1>
       <p>Form to create an article</p>
-      {/* <pre>{JSON.stringify(formulario)}</pre> */}
-      <pre>
-        <strong>{resultado == "guardado" ? "Successfully saved article!! " : ""}</strong>
-        <strong>{resultado == "error" ? "The data provided is incorrect" : ""}</strong>
-        <strong>{noFormato == "" ? "" : "A default image was assigned"}</strong>
-        </pre>
-      
+
       {/* Montar formulario */}
       <form className='formulario' onSubmit={guardarArticulo}>
 
         <div className='form-group'>
           <label htmlFor="titulo">TITLE</label>
-          <input type='text' name='titulo' onChange={cambiado} />
+          <input type='text' name='titulo' onChange={cambiado} placeholder='Máximo 50 caracteres' maxLength="50" />
         </div>
 
         <div className='form-group'>
           <label htmlFor="contenido">CONTENT</label>
-          <textarea type='text' name='contenido' onChange={cambiado} />
+          <textarea type='text' name='contenido' onChange={cambiado} maxLength="1000" placeholder='Máximo 1000 caracteres' />
         </div>
 
         <div className='form-group'>
@@ -85,7 +84,14 @@ export const Crear = () => {
           <input type='file' name='file0' id='file' />
         </div>
 
-        <input type='submit' value="SAVE" className='btn btn-success' />
+        {/* <pre>{JSON.stringify(formulario)}</pre> */}
+        <pre>
+          <strong>{resultado == "guardado" ? "Successfully saved article!! " : ""}</strong>
+          <strong>{resultado == "error" ? "The data provided is incorrect" : ""}</strong>
+          <strong>{noFormato == "" ? "" : " A default image was assigned, you can edit it later!"}</strong>
+        </pre>
+
+        <input type='submit' value="SAVE" className={ClaseBtnGuardar} disabled={btnDisable} />
 
       </form>
 
