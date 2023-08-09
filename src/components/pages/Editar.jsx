@@ -128,12 +128,12 @@ export const Editar = () => {
 
         <div className='form-group'>
           <label htmlFor="titulo">TÍTULO</label>
-          <input type='text' name='titulo' onChange={cambiado} defaultValue={articulo.titulo} />
+          <input type='text' name='titulo' onChange={cambiado} defaultValue={articulo.titulo} maxLength="50" placeholder='Máximo 50 caracteres'/>
         </div>
 
         <div className='form-group'>
           <label htmlFor="contenido">CONTENIDO</label>
-          <textarea type='text' name='contenido' onChange={cambiado} defaultValue={articulo.contenido} />
+          <textarea type='text' name='contenido' onChange={cambiado} defaultValue={articulo.contenido} maxLength="1000" placeholder='Máximo 1000 caracteres'/>
           {console.log("Valor de Formulario Cambiado: " + JSON.stringify(formulario))}
         </div>
 
@@ -152,10 +152,10 @@ export const Editar = () => {
         <input id='btnGuardar' type='submit' value={valor} className={clasebtnGuardar} disabled={disable} /><br/>
         <input id='btnEditar' onClick={bntEditarFunction} type='button' value={"EDIT"} className={clasebtnEditar} hidden={btnEditarHidden} disabled={disableEditar} />
         <pre>
-          <strong>{resultado == "guardado" ? "Artículo guardado con éxito!! " : ""}</strong>
+          <strong>{resultado == "guardado" ? "Article saved successfully!! " : ""}</strong>
           {console.log("RESULTADO: " + resultado)}
-          <strong>{resultado == "error" ? "Los datos proporcionados son incorrectos " : ""}</strong>
-          <strong>{noFormato == "" ? "" : "No se modificó la imagen"}</strong>
+          <strong>{resultado == "error" ? "The data provided is incorrect" : ""}</strong>
+          <strong>{noFormato == "" ? "" : "The image was not modified"}</strong>
           <strong>{resultado == "no_enviado" ? "" : ""}</strong>
         </pre>
 
