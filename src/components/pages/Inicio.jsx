@@ -13,8 +13,9 @@ export const Inicio = () => {
           <li>Express</li>  
           <li>React</li>
           <li>NodeJS</li>
-          <li>REST service</li>
           <li>API</li>
+          <li>REST service</li>
+          <li>JSON</li>
           <li>HTTP methods</li>
         </ul>
         <p>Blog App let us make requests to SERVER and load each one of articles, also let us create articles, read them, update them and delete them, let us make totality CRUD operations of way fast and secure.</p>
