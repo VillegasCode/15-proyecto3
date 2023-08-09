@@ -14,9 +14,9 @@ export const Sidebar = () => {
   return (
     <aside className="lateral">
       <div className="search">
-        <h3 className="title">Article Finder</h3>
+        <h3 className="title">Articles Finder</h3>
         <form onSubmit={hacerBusqueda}>
-          <input type="text" name="search_field" />
+          <input type="text" placeholder="Enter a keyword to search" name="search_field" />
           <input type="submit" id="search" value="Search" />
         </form>
       </div>
