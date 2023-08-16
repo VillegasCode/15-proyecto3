@@ -28,7 +28,7 @@ export const Articulo = () => {
     setCargando(false)
 
     // Verificando que la petición sea la correcta y esté devolviendo datos
-    console.log("CONSEGUIR ARTICULO: " + datos.articulo);
+    console.log("CONSEGUIR ARTICULO: " + JSON.stringify(datos.articulo));
   }
 
   // Cargamos desde el componente LISTADO con los 2 parámetros y lo recorremos con el método .map
