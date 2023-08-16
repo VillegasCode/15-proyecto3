@@ -37,6 +37,7 @@ export const Articulos = () => {
   useEffect(() => {
 
     conseguirArticulos();
+    
   }, [])
 
   const conseguirArticulos = async () => {
