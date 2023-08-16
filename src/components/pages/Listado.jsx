@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Global } from '../../helpers/Global';
 import { Peticion } from '../../helpers/Peticion';
 
 
 export const Listado = ({ articulos, setArticulos }) => {
+
+    const [leerMas,setLeerMas] = useState(true);
+    // if (JSON.parseInt(articulo.contenido) > 250) {
+    //         setLeerMas = false;
+    // }
 
     const eliminar = async (id) => {
         //alert(id);
@@ -33,9 +38,8 @@ export const Listado = ({ articulos, setArticulos }) => {
                     </div>
                     <div className='datos'>
                         <h3 className="title"><Link to={"/articulo/" + articulo._id}>{articulo.titulo}</Link></h3>
-                        <p className="description">{articulo.contenido.slice(0, 270)}...</p>
-
-                        <button id="readMoreButton" hidden="none">LEER MÁS</button>
+                        <p className="description">{articulo.contenido.slice(0, 250)}...</p>
+                        <Link id="readMoreButton" to={"/articulo/" + articulo._id} hidden={leerMas}>(LEER MÁS)</Link><br></br>
                    
 
                         <Link to={"/editar/" + articulo._id} className='edit'>Edit</Link>
