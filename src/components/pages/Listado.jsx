@@ -33,7 +33,7 @@ export const Listado = ({ articulos, setArticulos }) => {
                     </div>
                     <div className='datos'>
                         <h3 className="title"><Link to={"/articulo/" + articulo._id}>{articulo.titulo}</Link></h3>
-                        <p className="description">{articulo.contenido}</p>
+                        <p className="description">{articulo.contenido.slice(0, 270)}...</p>
 
                         <button id="readMoreButton" hidden="none">LEER MÁS</button>
                    
