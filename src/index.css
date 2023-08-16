@@ -134,8 +134,23 @@ li {
   margin-right: 40px;
 }
 
+.articulo-item .datos{
+  width: 80%;
+  overflow: hidden;
+}
+
 .articulo-item .mascara img{
   width: 100%;
+}
+
+#readMoreButton {
+  display: visible; /* Ocultar el botón inicialmente */
+}
+
+.description {
+  display: flex;
+  max-height: 50px;
+  overflow: hidden;
 }
 
 .articulo-item h3{
