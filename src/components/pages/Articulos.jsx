@@ -51,7 +51,7 @@ export const Articulos = () => {
     // let datos = await peticion.json();
     
     //Para saber que props tiene el objeto datos
-    console.log(datos);
+    console.log("DATOS CONSEGUIDOS: " + JSON.stringify(datos.articulos.length));
 
     // Si la prop status del objeto datos es "success" entonces el useState setArticulos se cargará con .articulos del objeto datos
     if (datos.status == "success") {
@@ -60,6 +60,22 @@ export const Articulos = () => {
 
     setCargando(false)
   }
+
+  // let descripcion = JSON.stringify(articulo.contenido.length);
+//   function contarDescripcion() {
+//     return (
+//         articulos.map(articulo => {
+//             let descripcion = JSON.stringify(articulo.contenido.length);
+//             if (descripcion > 250) {
+//                 setLeerMas("mostrarBTN");
+//                 console.log("Mayor a 250: " + descripcion + " status: " + leerMas);
+//             } else {
+//                 setLeerMas("ocultarBTN");
+//                 console.log("MENOR: " + descripcion + " status: " + leerMas);
+//             }
+//         })       
+//       )
+// }
 
 // Cargamos desde el componente LISTADO con los 2 parámetros y lo recorremos con el método .map
   return (
