@@ -1,16 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Global } from '../../helpers/Global';
 import { Peticion } from '../../helpers/Peticion';
 
+var descripcion = 0;
 
 export const Listado = ({ articulos, setArticulos }) => {
-
-    const [leerMas,setLeerMas] = useState(true);
-    // if (JSON.parseInt(articulo.contenido) > 250) {
-    //         setLeerMas = false;
-    // }
-
+    const [leerMas, setLeerMas] = useState("mostrarBTN");  
     const eliminar = async (id) => {
         //alert(id);
         let { datos } = await Peticion(Global.url + "articulo/" + id, "DELETE");
@@ -26,6 +22,7 @@ export const Listado = ({ articulos, setArticulos }) => {
 
         // {/* Creamos un objeto llamado articulo que contiene los datos recorridos por el array */ }
         articulos.map(articulo => {
+            descripcion = JSON.stringify(articulo.contenido.length)
             return (
 
                 // Creamos una key para react pueda identificar donde poner la información con los datos del array
@@ -39,9 +36,10 @@ export const Listado = ({ articulos, setArticulos }) => {
                     <div className='datos'>
                         <h3 className="title"><Link to={"/articulo/" + articulo._id}>{articulo.titulo}</Link></h3>
                         <p className="description">{articulo.contenido.slice(0, 250)}...</p>
-                        <Link id="readMoreButton" to={"/articulo/" + articulo._id} hidden={leerMas}>(LEER MÁS)</Link><br></br>
-                   
-
+                       
+                        {/* {descripcion > 250 ? setLeerMas("mostrarBTN") : setLeerMas("ocultarBTN")} */}
+                        <Link to={"/articulo/" + articulo._id} className={leerMas} >(LEER MÁS)</Link><br></br>
+                        {console.log("Nombre CLASE: " + leerMas)}
                         <Link to={"/editar/" + articulo._id} className='edit'>Edit</Link>
 
                         <button className="delete" onClick={() => {
@@ -52,7 +50,24 @@ export const Listado = ({ articulos, setArticulos }) => {
                 </article>
 
             );
-
-        })
+            
+        }
+        )
     )
+
+    // // let descripcion = JSON.stringify(articulo.contenido.length);
+    // function contarDescripcion() {
+    //     return (
+    //         articulos.map(articulo => {
+    //             let descripcion = JSON.stringify(articulo.contenido.length);
+    //             if (descripcion > 250) {
+    //                 setLeerMas("mostrarBTN");
+    //                 console.log("Mayor a 250: " + descripcion + " status: " + leerMas);
+    //             } else {
+    //                 setLeerMas("ocultarBTN");
+    //                 console.log("MENOR: " + descripcion + " status: " + leerMas);
+    //             }
+    //         })       
+    //       )
+    // }
 }
