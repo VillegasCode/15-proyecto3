@@ -5,6 +5,8 @@ import { Peticion } from "../../helpers/Peticion";
 import { Global } from '../../helpers/Global';
 import { useParams } from 'react-router-dom';
 var datosCopiar;
+var nroCharacters= 0;
+
 
 
 export const Editar = () => {
@@ -19,6 +21,9 @@ export const Editar = () => {
   const [clasebtnGuardar, setClaseBtnGuardar] = useState("btn btn-success");
   const [clasebtnEditar, setClaseBtnEditar] = useState("btn btn-editar");
   const [btnEditarHidden, setbtnEditarHidden] = useState(true);
+  const [preOcultar, setpreOcultar] = useState(false);
+  const [text, setText] = useState('');
+
 
   useEffect(() => {
     conseguirArticulo();
@@ -31,7 +36,9 @@ export const Editar = () => {
     if (datos.status === "success") {
       setArticulo(datos.articulo);
       datosCopiar = datos.articulo;
-      console.log("DATOS COPIAR: " + datosCopiar);
+      nroCharacters = (JSON.stringify(datos.articulo.contenido.length));  
+      setText(nroCharacters);
+      console.log("DATOS COPIAR: " + JSON.stringify(datosCopiar));
     }
     console.log("Form al cargar: " + JSON.stringify(formulario));
   }
@@ -43,6 +50,7 @@ export const Editar = () => {
     setDisable(false);
     setClaseBtnGuardar("btn btn-success");
     setbtnEditarHidden(true);
+    setpreOcultar(false);
     setResultado("no_enviado");
     setnoFormato("");
   }
@@ -75,11 +83,14 @@ export const Editar = () => {
     if (datos.status === "success" || datos.status === "Success") {
       setResultado("guardado");
       setValor("SAVED");
+      setText(JSON.stringify(datos.articulo.contenido.length));
+      nroCharacters = JSON.stringify(datos.articulo.contenido.length);
       setDisable(true);
       setDisableEditar(false);
       setClaseBtnGuardar("btn btn-disabled");
       setClaseBtnEditar("btn btn-editar-habilitado");
       setbtnEditarHidden(false);
+      setpreOcultar(true);
     } else {
       setResultado("error");
       console.log("DATOS STATUS ERRONEO: " + resultado);
@@ -117,12 +128,11 @@ export const Editar = () => {
     }
   }
 
-  return (
+   return (
     <div className='jumbo'>
       <h1>Edit Article</h1>
       <p>Form to Edit: {articulo.titulo}</p>
-      {/* <pre>{JSON.stringify(formulario)}</pre> */}
-
+      
       {/* Montar formulario */}
       <form className='formulario' onSubmit={editarArticulo}>
 
@@ -134,9 +144,12 @@ export const Editar = () => {
         <div className='form-group'>
           <label htmlFor="contenido">CONTENIDO</label>
           <textarea type='text' name='contenido' onChange={cambiado} defaultValue={articulo.contenido} maxLength="1000" placeholder='Máximo 1000 caracteres'/>
-          {console.log("Valor de Formulario Cambiado: " + JSON.stringify(formulario))}
+          {console.log("Valor de Formulario Cambiado: " + (JSON.stringify(formulario).length - 16))}
+          
+          <pre hidden={preOcultar}>Characters current: {(JSON.stringify(formulario).length - 16) == -14 || ((JSON.stringify(formulario).length - 16) > text) ? text : JSON.stringify(formulario).length - 16} (MAX: 1000)</pre>
         </div>
-
+        <p> Characters saved: {text}</p>
+        
         <div className='form-group'>
           <label htmlFor="file0">IMAGEN</label>
           <div className='mascara'>
