@@ -125,7 +125,7 @@ li {
   padding-right: 25px;
   text-align: left;
   display: flex;
-  max-height: 225px;
+  max-height: 255px;
 }
 
 .articulo-item .mascara{
@@ -143,8 +143,12 @@ li {
   width: 100%;
 }
 
-#readMoreButton {
-  display: visible; /* Ocultar el botón inicialmente */
+.mostrarBTN{
+  visibility: visible;
+}
+
+.ocultarBTN{
+  visibility: hidden;
 }
 
 .description {
